@@ -24,9 +24,7 @@ classifiers = [
 
 dependencies = [
     "openvr",
-    "numpy<2",
-    # "pyopengl",
-    # "scipy",
+    "numpy",
 ]
 
 [project.optional-dependencies]
