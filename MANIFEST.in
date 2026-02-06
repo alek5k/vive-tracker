@@ -1,0 +1,5 @@
+include README.md
+include LICENSE
+include requirements.txt
+include vive_tracker.png
+recursive-include vive_tracker *.py

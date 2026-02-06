@@ -1,0 +1,40 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "vive-tracker"
+version = "0.1.0"
+description = "HTC Vive Tracker 6 DOF tracking interface"
+readme = "README.md"
+requires-python = ">=3.7"
+license = {text = "MIT"}
+authors = [
+    {name = "Aleks Krnjaic", email = "aleks.krnjaic@gmail.com"}
+]
+keywords = ["vive", "tracker", "openvr", "steamvr", "6dof", "tracking"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+]
+
+dependencies = [
+    "openvr",
+    "numpy<2",
+    # "pyopengl",
+    # "scipy",
+]
+
+[project.optional-dependencies]
+dev = ["pytest"]
+
+[project.scripts]
+vive-tracker = "vive_tracker.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/snuvclab/Vive_Tracker"
+Repository = "https://github.com/snuvclab/Vive_Tracker"
