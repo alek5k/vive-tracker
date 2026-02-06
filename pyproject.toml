@@ -36,5 +36,5 @@ dev = ["pytest"]
 vive-tracker = "vive_tracker.cli:main"
 
 [project.urls]
-Homepage = "https://github.com/snuvclab/Vive_Tracker"
-Repository = "https://github.com/snuvclab/Vive_Tracker"
+Homepage = "https://github.com/alek5k/vive-tracker"
+Repository = "https://github.com/alek5k/vive-tracker"

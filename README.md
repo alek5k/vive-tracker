@@ -1,8 +1,10 @@
-# Vive_Tracker
+# Vive Tracker
 Vive Tracker 6 DOF Tracking
 <p align= "center">
 <img src="vive_tracker.png" width=500 height=300 alt="pipeline" class="center"/><br/><br/>
 </p>
+
+This is functionally a fork of [https://github.com/snuvclab/Vive_Tracker/tree/main](https://github.com/snuvclab/Vive_Tracker/tree/main) with all visualisation removed, and some better access to velocity data. Also automated the steamvr setup.
 
 > - HTC Base Station and Vive Tracker 3.0
 > - Tracking: Support for SteamVR BS1.0 and BS2.0 
@@ -14,24 +16,18 @@ Vive Tracker 6 DOF Tracking
 
 ## Installation
 
-### Option 1: Install from source (recommended for development)
+
+### Option 1: Install as a package
+```bash
+pip install git+https://github.com/alek5k/vive-tracker.git
+```
+
+### Option 2: Install from source (recommended for development)
 Clone the repository and install in editable mode:
 ```bash
-git clone https://github.com/snuvclab/Vive_Tracker.git
-cd Vive_Tracker
+git clone https://github.com/alek5k/vive-tracker.git
+cd vive_tracker
 pip install -e .
-```
-
-### Option 2: Install as a package
-```bash
-git clone https://github.com/snuvclab/Vive_Tracker.git
-cd Vive_Tracker
-pip install .
-```
-
-### Option 3: Install directly from GitHub (when published)
-```bash
-pip install git+https://github.com/snuvclab/Vive_Tracker.git
 ```
 
 > Note: This code was developed on Ubuntu 22.04 with Python 3.10. Later versions should work, but have not been tested.<br/>
@@ -44,7 +40,11 @@ conda activate vivetracker
 
 ## Setting up SteamVR
 > Install Steam:
-```
+```bash
+sudo apt install steam
+
+# or 
+
 https://cdn.cloudflare.steamstatic.com/client/installer/steam.deb
 sudo dpkg -i YourDownloadDirectory/steam_latest.deb
 sudo apt-get update
@@ -95,11 +95,6 @@ model = tracker.get_model()
 battery = tracker.get_battery_percent()
 ```
 
-### Legacy Script
-The original `run_tracker.py` script is still available for backward compatibility:
-```bash
-python run_tracker.py -f 30
-```
 
 ## Output Format
 > - Command line output: `timestamp x y z yaw pitch roll`
@@ -121,7 +116,5 @@ vive_tracker/
 └── README.md              # This file
 ```
 
-## Visualization
-To be updated...
 
 
