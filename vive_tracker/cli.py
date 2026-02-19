@@ -4,6 +4,15 @@ import argparse
 import time
 from vive_tracker.tracker import ViveTrackerModule, VRTrackedDevice
 from vive_tracker.steamvr import enable_vive_trackers_without_hmd
+from scipy.spatial.transform import Rotation, RigidTransform
+import numpy as np
+
+
+def print_translation(mat):
+    xyz = mat[:, 3][:3]
+    # print(mat)
+    print(f"translation {xyz[0]:.3f} {xyz[1]:.3f} {xyz[2]:.3f}")
+
 
 
 def print_tracker_data(tracker: VRTrackedDevice, interval):
@@ -13,17 +22,32 @@ def print_tracker_data(tracker: VRTrackedDevice, interval):
         tracker: The tracker device to monitor
         interval: Time interval between updates in seconds
     """
+
+    initial_pose = tracker.get_pose_matrix()
+
     while True:
         start_time = time.time()
 
-        pose = tracker.get_pose_euler()
         pose_mat = tracker.get_pose_matrix()
         vel = tracker.get_velocity()
-        pose_quat = tracker.get_pose_quaternion()
 
-        if pose:
-            pose_str = f"x={pose[0]:.4f} y={pose[1]:.4f} z={pose[2]:.4f} roll={pose[3]:.4f} pitch={pose[4]:.4f} yaw={pose[5]:.4f}, vel={vel}"
-            print(f"{time.time():.4f} {pose_str}")
+        if pose_mat is not None:
+            # pose_str = f"x={pose[0]:.4f} y={pose[1]:.4f} z={pose[2]:.4f} roll={pose[3]:.4f} pitch={pose[4]:.4f} yaw={pose[5]:.4f}" #, vel={vel}"
+            # print(f"{time.time():.4f} {pose_str}")
+            # rot = Rotation.from_euler(seq='xyz', angles=[pose[3], pose[4], pose[5]], degrees=True)
+            pose = tracker.get_pose_matrix()
+            own = np.linalg.inv(initial_pose) @ pose
+            print_translation(own)
+
+            # pose_str = f"x={pose[0]:.4f} y={pose[1]:.4f} z={pose[2]:.4f}"
+            # print(pose_str)
+# 
+            # print("pos", transform[:, 3][:3])
+            # print("rot", Rotation.from_matrix(transform[:3, :3]).as_rotvec())
+
+
+            # 
+            # print(rot.as_rotvec())
         else:
             print(f"{time.time():.4f} No pose data available.")
         

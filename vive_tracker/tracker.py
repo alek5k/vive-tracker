@@ -15,6 +15,16 @@ EYE_T = np.array(
     float,
 )
 
+
+def vr_pose_to_numpy(pose_mat):
+    transform = np.vstack(
+        [np.array(pose_mat[0]),
+        np.array(pose_mat[1]),
+        np.array(pose_mat[2]),
+        np.array([0, 0, 0, 1])]
+    )
+    return transform
+
 class ViveTrackerModule():
     def __init__(self, configfile_path=None, auto_configure_steamvr=True):
         """Initialize Vive Tracker Module.
@@ -291,7 +301,7 @@ class VRTrackedDevice:
             self.T[:3,:] = np_pose_mat       
         return self.T
 
-    def get_pose_euler(self, pose=None):
+    def _get_pose_euler(self, pose=None):
         """Get the pose of the tracked device in Euler angles.
 
         Args:
@@ -319,7 +329,8 @@ class VRTrackedDevice:
         if pose is None:
             pose = get_pose(self.vr)
         if pose[self.index].bPoseIsValid:
-            return pose[self.index].mDeviceToAbsoluteTracking
+            mat = pose[self.index].mDeviceToAbsoluteTracking
+            return vr_pose_to_numpy(mat)
         else:
             return None
 
@@ -342,7 +353,7 @@ class VRTrackedDevice:
             return None
 
 
-    def get_pose_quaternion(self, pose=None):
+    def _get_pose_quaternion(self, pose=None):
         '''
         Get pose of tracked device in the form of a quaternion if its pose is valid.
         [x, y, z, r_w, r_x, r_y, r_z]
