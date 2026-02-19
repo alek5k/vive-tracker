@@ -22,7 +22,7 @@ def print_tracker_data(tracker: VRTrackedDevice, interval):
         pose_quat = tracker.get_pose_quaternion()
 
         if pose:
-            pose_str = f"x={pose[0]:.4f} y={pose[1]:.4f} z={pose[1]:.4f} yaw={pose[1]:.4f} pitch={pose[1]:.4f} roll={pose[1]:.4f}, vel={vel}"
+            pose_str = f"x={pose[0]:.4f} y={pose[1]:.4f} z={pose[2]:.4f} roll={pose[3]:.4f} pitch={pose[4]:.4f} yaw={pose[5]:.4f}, vel={vel}"
             print(f"{time.time():.4f} {pose_str}")
         else:
             print(f"{time.time():.4f} No pose data available.")

@@ -3,7 +3,7 @@ import sys
 import openvr
 import math
 import numpy as np
-from .steamvr import enable_vive_trackers_without_hmd, check_steamvr_settings
+from vive_tracker.steamvr import enable_vive_trackers_without_hmd, check_steamvr_settings
 
 EYE_T = np.array(
     [
